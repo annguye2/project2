@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript">
+  function showDescription() {
+    var name = document.getElementById("selectTask").value;
+    name = 'Need question on how to show description here:  ' + name;
+    document.getElementById("description").value=name;
+  }
+
+  </script>
+  <meta charset="utf-8">
+  <title>Show Task</title>
+</head>
+<body>
+  <h1> Show Each TASH (needed??) </h1>
+
+  <ul>
+    <% for(var i = 0; i < tasks.length; i++){ %>
+      <li>
+        <a  title="Description: <%=tasks[i].description%>"href="/tasks/<%=i%>"><%=tasks[i].name%></a>
+      </li>
+      <% } %>
+    </ul>
+</section>
+
+  </body>
+  </html>

@@ -1,0 +1,21 @@
+{
+  "name": "tts",
+  "version": "1.0.0",
+  "description": "TTS stands for Task Tracking Systems: This small app created for team's manager to track task for each of his/her colleagues under his/her supervise - The app would allow a registered manager add employees into a specific task received from above higher manager or supervisor - The app gives the manager ability to see  number of employees in each task or number of tasks in each employees. - The manager(s) has ability to edit the number of hours of each task assigned to specific performer. - The manager(s) has ability too remove/edit each task for each performer, or change performer from each task",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "An Nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "method-override": "^2.3.8",
+    "mongoose": "^4.9.2"
+  }
+}
