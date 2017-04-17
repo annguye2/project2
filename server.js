@@ -86,31 +86,12 @@ app.get('/', function(req, res){
 
 
 
-//
-// // app.get('/app', function(req, res){
-// //     if(req.session.currentuser){
-// //         res.send('the party');
-// //     } else {
-// //         res.redirect('/sessions/new');
-// //     }
-// // });
-//
-//
-// app.get('/app', function(req, res){
-//   // if currnt user exist then go to the party, othewiser then must be back to the  login
-//   if (req.session.currentuser === undefined){
-//   res.redirect('/sessions/new');
-//   }else {
-//     res.send('The Party')
-//   }
-//
-// })
 mongoose.connect('mongodb://localhost:27017/tts_db')
 mongoose.connection.once('open', function(){
     console.log('connected to mongo');
 });
 
-app.listen(3050, function(){
+app.listen(3020, function(){
     console.log('Project II is listening...');
 });
 //------------------------testing section --------------//
@@ -122,13 +103,8 @@ app.listen(3050, function(){
  // mongo.connect(mongoDBURL);
 // mongoose.connection(mongoose.connect('mongodb://localhost:27017/herokutest'))
 
-
-
-
-
 //app.listen(port, function (){
 // console.log('listing on port ');
 //})
-
 
 //---- end of testing section
