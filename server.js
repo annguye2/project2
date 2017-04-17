@@ -95,7 +95,7 @@ app.get('/', function(req, res){
 });
 
 
-mongo.connect(mongoDBURL);
+mongoose.connect(mongoDBURL);
 mongoose.connection(mongoose.connect('mongodb://localhost:27017/herokutest'))
 
 // mongoose.connect('mongodb://localhost:27017/tts_db')
