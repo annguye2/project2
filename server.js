@@ -96,7 +96,7 @@ app.get('/', function(req, res){
 
 
 mongoose.connect(mongoDBURL);
-mongoose.connection(mongoose.connect(mongoDBURL))
+// mongoose.connection(mongoose.connect(mongoDBURL))
 
 // mongoose.connect('mongodb://localhost:27017/tts_db')
 // mongoose.connection.once('open', function(){
