@@ -1,9 +1,20 @@
 var express = require('express');
 var app = express();
+
+
+
+
+
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var methodOverride = require('method-override');
+
+var mongoDBURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/herokutest'
+var port = process.env.PORT || 3000;
+
+
+
 
 var Tasks = require('./models/task.js')
 var Employees = require('./models/employee.js');
@@ -84,14 +95,15 @@ app.get('/', function(req, res){
 });
 
 
+mongo.connect(mongoDBURL);
+mongoose.connection(mongoose.connect('mongodb://localhost:27017/herokutest'))
 
+// mongoose.connect('mongodb://localhost:27017/tts_db')
+// mongoose.connection.once('open', function(){
+//     console.log('connected to mongo');
+// });
 
-mongoose.connect('mongodb://localhost:27017/tts_db')
-mongoose.connection.once('open', function(){
-    console.log('connected to mongo');
-});
-
-app.listen(3020, function(){
+app.listen(port, function(){
     console.log('Project II is listening...');
 });
 //------------------------testing section --------------//
