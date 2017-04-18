@@ -27,6 +27,15 @@ var getTaskedEmployees = function(allEmployees){
   }
   return taskedEmployees
 }
+
+//------- testing 
+
+rounter.get('/json', function(req, res)=>{
+  Employees.find((err, employees)=>{res.send(employees)})
+})
+
+
+
 //-----------------------------------------------Employee index page
 router.get('/', function(req, res){
   Employees.find({}, function (err, allEmployees){
@@ -68,7 +77,6 @@ router.delete('/:id', function(req, res){
         //console.log("foundTasks:  ", foundTasks);
       })
     }
-
 
     foundEmployee.tasks =[];
     foundEmployee.save();

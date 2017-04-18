@@ -79,7 +79,7 @@ var tasksController = require('./controllers/tasks.js');
 app.use('/tasks', tasksController);
 //
 app.get('/', function(req, res){
-
+//loadData();
     res.render('index.ejs', {
         tasks:jobs,
         employees
@@ -94,5 +94,5 @@ app.listen(port, function(){
 //------------------------testing section --------------//
 
 //https://evening-everglades-34630.herokuapp.com/
-
+loadData();
 //---- end of testing section
