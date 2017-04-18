@@ -1,20 +1,14 @@
 var express = require('express');
 var app = express();
 
-
-
-
-
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var methodOverride = require('method-override');
 
+// connect to heroku server db
 var mongoDBURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/herokutest'
 var port = process.env.PORT || 3000;
-
-
-
 
 var Tasks = require('./models/task.js')
 var Employees = require('./models/employee.js');
@@ -28,7 +22,6 @@ var db = mongoose.connection;
 db.on('error', function(){
 	console.log('error');
 });
-
 
 // loading data into monogodb
 var loadData = function (){
@@ -82,7 +75,6 @@ loadData();
 
 var employeesController = require('./controllers/employees.js');
 app.use('/employees', employeesController);
-
 var tasksController = require('./controllers/tasks.js');
 app.use('/tasks', tasksController);
 //
@@ -94,29 +86,13 @@ app.get('/', function(req, res){
     });
 });
 
-
 mongoose.connect(mongoDBURL);
-// mongoose.connection(mongoose.connect(mongoDBURL))
-
-// mongoose.connect('mongodb://localhost:27017/tts_db')
-// mongoose.connection.once('open', function(){
-//     console.log('connected to mongo');
-// });
 
 app.listen(port, function(){
     console.log('Project II is listening...');
 });
 //------------------------testing section --------------//
 
-//Heroku section
-
-// var mongoDBURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/herokutest'
-// var port = process.env.PORT || 3000;
- // mongo.connect(mongoDBURL);
-// mongoose.connection(mongoose.connect('mongodb://localhost:27017/herokutest'))
-
-//app.listen(port, function (){
-// console.log('listing on port ');
-//})
+//https://evening-everglades-34630.herokuapp.com/
 
 //---- end of testing section

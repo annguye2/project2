@@ -31,8 +31,8 @@ module.exports  = [
   },
   {
     name: "Task 6 - ESRI Database Support",
-    chargeNumber:"CHARGE-0005-0005-0005",
-    description: "This is task number 5",
+    chargeNumber:"CHARGE-0006-0006-0006",
+    description: "This is task number 6",
     hours:  160
   }
 ]
