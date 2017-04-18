@@ -28,11 +28,15 @@ var getTaskedEmployees = function(allEmployees){
   return taskedEmployees
 }
 
-//------- testing 
+//------- testing
 
-rounter.get('/json', function(req, res)=>{
-  Employees.find((err, employees)=>{res.send(employees)})
-})
+rounter.get('/json', (req, res)=>{
+  Employees.find(( err, employees)=>{
+    if (err) { res.send(err)
+    } else { res.send(employees)}
+
+  });
+});
 
 
 
