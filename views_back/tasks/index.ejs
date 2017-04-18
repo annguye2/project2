@@ -34,12 +34,10 @@
 
   <ul>
     <% for(var i = 0; i < tasks.length; i++){ %>
-
       <li>
         <a  title="Description: <%=tasks[i].description%>"  href="/tasks/<%=tasks[i].id %>" > <%=tasks[i].name%></a>
       </li>
       <% } %>
-
     </ul>
 </section>
 <section>
@@ -48,25 +46,10 @@
 <h2> Added  Tasks </h2>
 
 <ul>
-  <% for(var i = 0; i < assignedTasks.length; i++){ %>
-    <form action="/tasks/<%=assignedTasks[i]._id%>?_method=DELETE" method="post">
-
+  <% for(var i = 0; i < tasks.length; i++){ %>
     <li>
-      <a  title="Description: <%=assignedTasks[i].description%>"href="/tasks/<%=assignedTasks[i]._id%>"><%=assignedTasks[i].name%></a>
-      <input type="submit" name="delete" value="remove">
-      <ul>
-        <% for(var ii = 0; ii < assignedTasks[i]._employees.length; ii++){ %>
-
-          <li>
-            <a href="/employees/<%=assignedTasks[i]._employees[ii]._id%>"><%=assignedTasks[i]._employees[ii].name%> </a>
-
-                                  try to display planned hours here
-
-          </li>
-        <% } %>
-      </ul>
+      <a  title="Description: <%=tasks[i].description%>"href="/tasks/<%=i%>">not available at this time</a>
     </li>
-  </form>
     <% } %>
   </ul>
 </section>
