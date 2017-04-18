@@ -6,9 +6,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var methodOverride = require('method-override');
 
-// connect to heroku server db
+// connect to heroku
 var mongoDBURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/herokutest'
 var port = process.env.PORT || 3000;
+
+
+
 
 var Tasks = require('./models/task.js')
 var Employees = require('./models/employee.js');
@@ -23,12 +26,12 @@ db.on('error', function(){
 	console.log('error');
 });
 
+
 // loading data into monogodb
 var loadData = function (){
   db.once('open', function(){
     for (var i = 0; i < employees.length; i++) {
       var employee_data = {
-				_id: i,
         name: employees[i].name,
         employeeId: employees[i].empId,
         tasks: [],
@@ -75,16 +78,18 @@ loadData();
 
 var employeesController = require('./controllers/employees.js');
 app.use('/employees', employeesController);
+
 var tasksController = require('./controllers/tasks.js');
 app.use('/tasks', tasksController);
 //
 app.get('/', function(req, res){
-//loadData();
+
     res.render('index.ejs', {
         tasks:jobs,
         employees
     });
 });
+
 
 mongoose.connect(mongoDBURL);
 
@@ -93,6 +98,6 @@ app.listen(port, function(){
 });
 //------------------------testing section --------------//
 
-//https://evening-everglades-34630.herokuapp.com/
-loadData();
+
+
 //---- end of testing section

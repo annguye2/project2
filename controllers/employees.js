@@ -30,14 +30,27 @@ var getTaskedEmployees = function(allEmployees){
 
 //------- testing
 
-rounter.get('/json', (req, res)=>{
-  Employees.find(( err, employees)=>{
-    if (err) { res.send(err)
-    } else { res.send(employees)}
+// router.get('/json', (req, res)=>{
+//   //res.send('found route')
+//   // Employees.find({}, ( err, employees)=>{
+//   //
+//   //   if (err)
+//   //   { res.send(err)
+//   //   } else { res.send(employees)}
+//   //
+//   // });
+// });
 
-  });
-});
-
+// router.get('/:id', (req, res)=>{
+//   Employees.find({}, ( err, employees)=>{
+//
+//     if (err)
+//     { res.send(err)
+//     } else { res.send(employees)}
+//
+//   });
+//
+// });
 
 
 //-----------------------------------------------Employee index page
