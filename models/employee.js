@@ -11,22 +11,3 @@ var employeeSchema =  mongoose.Schema(
    email: { type: String }
 });
  module.exports = mongoose.model ('Employee', employeeSchema);
-
-
- //
- // var Task = require('./task.js')
- // var mongoose = require('mongoose');
- // var Schema = mongoose.Schema;
- // var employeeSchema =  mongoose.Schema(
- //  {
- //    _id: Number,
- //    name: {  type: String, required: true   },
- //    employeeId: { type: String, required: true, unique: true  },
- //     _tasks:   [{type: Schema.ObjectId, ref: 'Task' }],
- //    //_tasks:   [Task.Schema],
- //    availableHour: { type: Number, default: 176 },
- //    phone: {  type: String },
- //    isAvailable: { type: Boolean, default: false,  required: true},
- //    email: { type: String }
- // });
- //  module.exports = mongoose.model ('Employee', employeeSchema);

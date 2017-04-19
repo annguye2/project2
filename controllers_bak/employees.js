@@ -5,18 +5,6 @@ var Tasks = require('../models/task.js');
 var employees = require('../data/employees.js'); // employees data
 
 // server supporting methods
-//------------------------------edit task
-var editTasks = function (tasks, chargeNumber, plannedHours){
-
- for (var i = 0; i < tasks.length; i++) {
-         if (tasks[i].chargeNumber == chargeNumber){
-            tasks[i].plannedHours = plannedHours;
-            break;
-         }
- }
- return tasks
-}
-//------------------------------ get selected task
 var removeEmployee = function (employees, employeeId){
   for (var i = 0; i < employees.length; i++) {
     console.log("employees[i].employeeId ", employees[i].employeeId , 'and passed in empIF: ', employeeId);
@@ -39,6 +27,32 @@ var getTaskedEmployees = function(allEmployees){
   }
   return taskedEmployees
 }
+
+//------- testing
+
+// router.get('/json', (req, res)=>{
+//   //res.send('found route')
+//   // Employees.find({}, ( err, employees)=>{
+//   //
+//   //   if (err)
+//   //   { res.send(err)
+//   //   } else { res.send(employees)}
+//   //
+//   // });
+// });
+
+// router.get('/:id', (req, res)=>{
+//   Employees.find({}, ( err, employees)=>{
+//
+//     if (err)
+//     { res.send(err)
+//     } else { res.send(employees)}
+//
+//   });
+//
+// });
+
+
 //-----------------------------------------------Employee index page
 router.get('/', function(req, res){
   Employees.find({}, function (err, allEmployees){
@@ -46,42 +60,6 @@ router.get('/', function(req, res){
       employees:allEmployees.sort(),
       taskedEmployees: getTaskedEmployees(allEmployees).sort()
     });
-  });
-});
-
-//------------------- edit Employe task infor (*hours*)
-router.get('/:imployeeObjId/:taskChargeNumber/edit', function (req, res){
-  Employees.findById({_id: req.params.imployeeObjId}, function(err, foundEmployee){
-    Tasks.findOne({chargeNumber: req.params.taskChargeNumber}, function (err, foundTask){
-      res.render('./employees/edit.ejs', {
-        employee :foundEmployee,
-        task: foundTask
-      });
-    });
-  });
-});
-
-//------------------------------------------Edit task
-router.put('/:id', function(req, res){
-  console.log('------------ put--------');
-  Employees.findOne({employeeId: req.body.employeeId}, function(err, foundEmployee){
-    Tasks.findOne({chargeNumber: req.body.chargeNumber}, function (err, foundTask){
-          var tasks = foundEmployee.tasks; //save the tasks
-          foundEmployee.tasks =[];
-          foundEmployee.tasks = editTasks(tasks, req.body.chargeNumber, req.body.plannedHours);
-          foundEmployee.save();
-      for (var i = 0 ; i < foundTask._employees.length ; i ++){
-            //find employee
-              if (foundTask._employees[i].employeeId == req.body.employeeId){
-                 console.log(foundTask._employees[i]);
-                 foundTask._employees[i].tasks = [];
-                 foundTask._employees[i].tasks =foundEmployee.tasks
-                break;
-              }
-        }
-        foundTask.save();
-    });
-    res.redirect('/employees')
   });
 });
 
@@ -116,6 +94,7 @@ router.delete('/:id', function(req, res){
         //console.log("foundTasks:  ", foundTasks);
       })
     }
+
     foundEmployee.tasks =[];
     foundEmployee.save();
     res.redirect('/employees');

@@ -43,15 +43,16 @@
 									<ul>
 										<% for(var ii = 0; ii < taskedEmployees[i].tasks.length; ii++){ %>
 											<li>
-												 <%=taskedEmployees[i].tasks[ii].name%>
-												<span> Planned Hours:   <%=taskedEmployees[i].tasks[ii].plannedHours%> </span>
-												<a href="/employees/<%=taskedEmployees[i]._id%>/<%=taskedEmployees[i].tasks[ii].chargeNumber%>/edit"> Edit hour</a>
+												<a href="/employees/<%=taskedEmployees[i].id%>"><%=taskedEmployees[i].tasks[ii].name%> </a>
+												<label for="numberHours">Planned Hours: </label> <%=taskedEmployees[i].tasks[ii].plannedHours%>
 											</li>
 											<% } %>
 										</ul>
+
 									</div>
 								</li>
 							</form>
+
 							<% } %>
 						</ul>
 					</section>

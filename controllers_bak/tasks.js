@@ -99,35 +99,15 @@ router.post('/', function(req, res){
 
 //---------------------------------- Edit
 // show assigned task, and show method of edit or delete
-router.get('/:id/show', function(req, res){
-  console.log('---------------');
-  var hourObjs =[];
-  Tasks.findById(req.params.id, function (err, foundTask){
-   var _employees = foundTask._employees;
-      for (var i = 0; i < _employees.length; i++) {
-        console.log('employee name:', _employees[i].name);
-        var tasks = _employees[i].tasks;
-         for (var ii = 0; ii < tasks.length; ii++) {
-             if (tasks[ii].chargeNumber == foundTask.chargeNumber){
-               hourObjs.push({ chargeNumber: foundTask.chargeNumber,plannedHours: tasks[ii].plannedHours})
-              //  console.log(tasks[ii].chargeNumber);
-              //  console.log(tasks[ii].plannedHours);
-             }
-         }
-      }
-
-        res.render("./tasks/show.ejs", {
-          task: foundTask,
-          employees:_employees,
-          plannedHoursObjs: hourObjs
-        });
-  });
-});
+router.get('/:id/edit', function(req, res){
+  res.send("show/edit")
+})
 
 //------------------------show selected task with list of employees
 router.get('/:id', function(req,res){
   Tasks.findOne({ _id: req.params.id }, function(err, foundTask){
     Employees.find({}, function(err, allEmployees){
+      //console.log('found task', foundTask);
       res.render('./tasks/new.ejs',
       {
         employees: allEmployees,

@@ -43,7 +43,7 @@ module.exports  = [
   {
     name: "Jenny Sways",
     empId: "50007",
-    email: "jenny.Sways@bbh.com",
+    email: "jenny.tran@bbh.com",
     phone: "703-000-0007"
   },
 

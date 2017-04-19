@@ -20,7 +20,7 @@ var jobs = require('./data/jobs.js');
 var employees = require('./data/employees.js');
 app.use(methodOverride('_method'));
 app.use(bodyParser.urlencoded({extended:false}));
-
+app.use( express.static( 'public' ) );
 var db = mongoose.connection;
 db.on('error', function(){
 	console.log('error');
@@ -94,7 +94,7 @@ app.get('/', function(req, res){
 mongoose.connect(mongoDBURL);
 
 app.listen(port, function(){
-    console.log('Project II is listening...');
+    console.log('Server is listening...');
 });
 //------------------------testing section --------------//
 

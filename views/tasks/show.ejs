@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/skeleton.css">
+  <!--   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="/css/main.css"/>
+
+
   <script type="text/javascript">
   function showDescription() {
     var name = document.getElementById("selectTask").value;
@@ -13,16 +19,56 @@
   <title>Show Task</title>
 </head>
 <body>
-  <h1> Show Each TASH (needed??) </h1>
+  <header>
+    <h1>Tasks Tracking System</h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/tasks">Tasks List</a>
+        </li>
+        <li>
+          <a href="/employees">Team Members</a>
+        </li>
+      </ul>
+    </nav>
+    <h3> <%=task.name%> </h3>
+    <p> <%=task.numHours%> </p>
+    <p> <%=task.chargeNumber%> </p>
+    <h2>print task information here </h2>
+  </header>
+  <div class="container-fluid">
 
-  <ul>
-    <% for(var i = 0; i < tasks.length; i++){ %>
-      <li>
-        <a  title="Description: <%=tasks[i].description%>"href="/tasks/<%=i%>"><%=tasks[i].name%></a>
-      </li>
-      <% } %>
-    </ul>
-</section>
+    <ul>
+      <% for(var i = 0; i < employees.length; i++){ %>
 
-  </body>
-  </html>
+        <div class="row">
+
+          <div class='seven columns'>
+
+            <div id='a'class="one-half column">
+              <li>
+                <a  href="/employees/<%=employees[i].id%>"><%=employees[i].name%></a>
+              </li>
+            </div>
+            <div class="one-half column" id='b'>
+              Planned Hours: <%=plannedHoursObjs[i].plannedHours%>
+            </div>
+          </div>
+
+          <% } %>
+        </ul>
+
+
+          <div class="row">
+            <div class="one-half column">1/2</div>
+            <div class="one-half column">1/2</div>
+
+        </div>
+
+      </div>
+
+    </body>
+    </html>

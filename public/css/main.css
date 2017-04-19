@@ -1,0 +1,28 @@
+body{
+  /*background-color : #7798E8;*/
+  font-family:Roboto,Arial,sans-serif;-ms-touch-action:none;touch-action:none
+  background:  #D8FDFD;
+}
+a {
+    text-decoration: none !important;
+}
+.nav {
+
+  width: 100%;
+  position: fixed;
+  top : 0;
+}
+li {
+  list-style: none;
+}
+
+
+/*#b{
+text-align:justify;
+border: 1px solid black;
+}
+
+#a{
+text-align: left;
+border: 1px solid black;
+}*/

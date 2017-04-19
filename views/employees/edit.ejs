@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script>
+  function back() {
+    window.history.back();
+  }
+  </script>
+  <meta charset="utf-8">
+  <title>Assigned Task  Information</title>
+</head>
+<body>
+  <header>
+    <h1>Tasks Tracking System</h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/employees">Team Members</a>
+        </li>
+        <li>
+          <a href="/tasks">Task Lists</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <form action="/employees/<%=employee._id%>?_method=PUT" method="POST">
+    <h4> Task information:</h4>
+    <label for="task">Task Name:</label>
+    <input readonly="true "type="text"  name="taskName" value="<%=task.name%>"> <br>
+    <label for="chargeNumber">Charge Number:</label>
+    <input readonly="true "type="text"  name="chargeNumber" value="<%=task.chargeNumber%>"><br>
+    <h4> Employee information:</h4>
+    <label for="name">Employee Name: </label>
+    <input readonly="true" type="text" name="employeeName" value="  <%= employee.name %> "><br>
+    <label for="name">Employee ID: </label>
+    <input readonly="true" type="text" name="employeeId" value="<%= employee.employeeId %>"><br>
+    <label for="name">Planned hours: </label>
+    <input  type="text" name="plannedHours" value="<%= employee.plannedHours %>"> <span color='red'>(required)</span>  <br>
+    <input type="submit" name="go-back" value="Go back" onclick="back()">
+    <input type="submit" name="add-empId" value="Save Edit">
+  </form>
+</body>
+</html>
