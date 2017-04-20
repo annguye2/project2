@@ -16,7 +16,7 @@ which do the following:
 <body>
   <% include ../partials/header %>
   <div id ='container-1' class="container">
-    <h4> Add employee to new Task</h4>
+    <h4> Add employee to a new Task</h4>
     <form class="" action="/tasks" method="post">
       <div class="row">
         <h4> Task information</h4>
@@ -39,7 +39,7 @@ which do the following:
       </div>
       <div class="row">
         <div id='col-1-show'class="col-xs-6">
-          <label for="hours">Total hours:</label>
+          <label for="hours">Total Hours:</label>
         </div>
         <div id='col-2-show'class="col-xs-6">
           <input id='text' readonly="true "type="text"  name="numberHours" value="<%=task.numHours%>"><br>
@@ -47,7 +47,7 @@ which do the following:
       </div>
       <div class="row">
         <div id='col-1-show'class="col-xs-6">
-          <label for="hours">Hours remain:</label>
+          <label for="hours">Available Hours:</label>
         </div>
         <div id='col-2-show'class="col-xs-6">
           <input id='text' readonly="true "type="text"  name="numAvailableHours" value="<%=task.numAvailableHours%>"><br>
