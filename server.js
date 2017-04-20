@@ -10,9 +10,6 @@ var methodOverride = require('method-override');
 var mongoDBURL = process.env.MONGODB_URI || 'mongodb://localhost:27017/herokutest'
 var port = process.env.PORT || 3000;
 
-
-
-
 var Tasks = require('./models/task.js')
 var Employees = require('./models/employee.js');
 

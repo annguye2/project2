@@ -66,7 +66,7 @@ router.post('/create', function(req, res){
     chargeNumber: req.body.chargeNumber,
     description: req.body.description,
     numHours: req.body.numberHours,
-    numCompletedHours: 0,
+    numAvailableHours: req.body.numberHours,
     _employees:[],
     date: Date()
   }
@@ -74,12 +74,14 @@ router.post('/create', function(req, res){
   task.save( function(err, data){
     if(err){
       console.log('task error', err);
+      res.send(500, err);
     }
     else{
       console.log(data);
+      res.redirect('/tasks');
     }
 })
-  res.redirect('/tasks');
+
 });
 //----------------------------------show list of available task
 
