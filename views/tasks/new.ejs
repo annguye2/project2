@@ -41,13 +41,13 @@
 									<a   href="/employees/<%=employees[i].id%>"><%=employees[i].name%></a>
 							</div>
 							<div id='col-2-show'class="col-xs-6">
-								<a  id='button'class="btn btn-primary"  href="/tasks/<%=task.id%>/<%=employees[i].id%>/add">Add</a>
+								<a  id='button'class="btn btn-primary"  href="/tasks/<%=task.id%>/<%=employees[i].id%>/add">Select</a>
 							</div>
 						</div>
 						<hr>
 					<% } %>
 				</ul>
 </div>
-
+  <% include ../partials/footer %>
 	</body>
 </html>

@@ -81,6 +81,7 @@ router.get('/', function(req, res){
 router.get('/:imployeeObjId/:taskChargeNumber/edit', function (req, res){
   Employees.findById({_id: req.params.imployeeObjId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.params.taskChargeNumber}, function (err, foundTask){
+      console.log('in edit ', foundEmployee);
       res.render('./employees/edit.ejs', {
         employee :foundEmployee,
         task: foundTask

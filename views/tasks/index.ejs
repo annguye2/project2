@@ -23,7 +23,9 @@
         <ul>
           <% for(var i = 0; i < tasks.length; i++){ %>
             <li>
-              <a  title="Description: <%=tasks[i].description%>"  href="/tasks/<%=tasks[i].id %>" > <%=tasks[i].name%></a>
+              <a  title="Description: <%=tasks[i].description%>&#13Action: Click on this task to select employee"
+                  href="/tasks/<%=tasks[i].id %>" > <%=tasks[i].name%>
+              </a>
             </li>
             <% } %>
           </ul>
@@ -50,7 +52,8 @@
                 <form action="/tasks/<%=assignedTasks[i]._id%>?_method=DELETE" method="post">
                   <li>
                     <div id='col-1'class="col-xs-4">
-                      <a  title="Description: <%=assignedTasks[i].description%>"href="/tasks/<%=assignedTasks[i]._id%>"><%=assignedTasks[i].name%></a>
+                      <a  title="Description: <%=assignedTasks[i].description%>&#13Action: Click on this task to select more employee"
+                        href="/tasks/<%=assignedTasks[i]._id%>"><%=assignedTasks[i].name%></a>
                     </div>
                     <div id='col-2'class="col-xs-8">
                       <input   id='button'  class="btn btn-primary" type="submit" name="delete" value="Remove">
@@ -60,7 +63,7 @@
                     <ul>
                       <% for(var ii = 0; ii < assignedTasks[i]._employees.length; ii++){ %>
                         <li>
-                          <a href="/employees/<%=assignedTasks[i]._employees[ii]._id%>"><%=assignedTasks[i]._employees[ii].name%> </a>
+                          <a title="View <%=assignedTasks[i]._employees[ii].name%>'s task information" href="/employees/<%=assignedTasks[i]._employees[ii]._id%>"><%=assignedTasks[i]._employees[ii].name%> </a>
                         </li>
                         <% } %>
                       </ul>

@@ -9,23 +9,72 @@
 <body>
   <% include ../partials/header %>
     <h4>Edit Hours</h4>
+    <div id='container-1' class="container">
+      <form action="/employees/<%=employee._id%>?_method=PUT" method="POST">
+        <h4> Task information:</h4>
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="task">Task Name:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text'readonly="true "type="text"  name="taskName" value="<%=task.name%>"> <br>
+          </div>
+        </div>
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="chargeNumber">Charge Number:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text'readonly="true "type="text"  name="chargeNumber" value="<%=task.chargeNumber%>"><br>
+          </div>
+        </div>
 
-  <form action="/employees/<%=employee._id%>?_method=PUT" method="POST">
-    <h4> Task information:</h4>
-    <label for="task">Task Name:</label>
-    <input readonly="true "type="text"  name="taskName" value="<%=task.name%>"> <br>
-    <label for="chargeNumber">Charge Number:</label>
-    <input readonly="true "type="text"  name="chargeNumber" value="<%=task.chargeNumber%>"><br>
-    <h4> Employee information:</h4>
-    <label for="name">Employee Name: </label>
-    <input readonly="true" type="text" name="employeeName" value="  <%= employee.name %> "><br>
-    <label for="name">Employee ID: </label>
-    <input readonly="true" type="text" name="employeeId" value="<%= employee.employeeId %>"><br>
-    <label for="name">Planned hours: </label>
-    <input  type="text" name="plannedHours" value="<%= employee.plannedHours %>"> <span color='red'>(required)</span>  <br>
-    <input type="submit" name="go-back" value="Go back" onclick="back()">
-    <input type="submit" name="add-empId" value="Save Edit">
-  </form>
+        <div id='container-2' class="container">
+          <h4> Employee information:</h4>
+
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+              <label for="name">Employee Name: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+           <input id='text' readonly="true" type="text" name="employeeName" value="  <%= employee.name %> "><br>
+            </div>
+          </div>
+
+          <!-- <label for="name">Employee ID: </label>
+          <input readonly="true" type="text" name="employeeId" value="<%= employee.employeeId %>"><br> -->
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                <label for="name">Employee ID: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+           <input id='text' readonly="true" type="text" name="employeeId" value="<%= employee.employeeId %>"><br>
+            </div>
+          </div>
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                  <label for="name">Planned hours: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+             <input id='text' type="text" name="plannedHours" value="<%= employee.plannedHours %>"> <span id='required'>(required)</span>  <br>
+            </div>
+          </div>
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                  <input id='button'  class="btn btn-primary"type="submit" name="go-back" value="Back" onclick="back()">
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+              <input id='button'  class="btn btn-primary"type="submit" name="add-empId" value="Save Edit">
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+
+
     <% include ../partials/footer %>
 </body>
 </html>

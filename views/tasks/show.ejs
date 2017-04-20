@@ -53,7 +53,7 @@
         <div class="row">
            <div id='col-1'class="col-xs-6">
              <li>
-               <a  href="/employees/<%=employees[i].id%>"><%=employees[i].name%></a>
+               <a title="View <%=employees[i].name%>'s task information" href="/employees/<%=employees[i].id%>"><%=employees[i].name%></a>
              </li>
            </div>
             <div id='col-2'class="col-xs-6"  >
@@ -65,6 +65,8 @@
           </div>
           <% } %>
         </ul>
+
+</div>
 <% include ../partials/footer %>
     </body>
     </html>

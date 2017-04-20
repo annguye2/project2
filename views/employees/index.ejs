@@ -13,10 +13,10 @@
 
 					<div id='row' class="row">
 						<div class="col-xs-5">
-							<a href="/employees/<%=employees[i].id%>"><%=employees[i].name%> </a><hr>
+							<a title="View <%=employees[i].name%>'s task information'"  href="/employees/<%=employees[i].id%>"><%=employees[i].name%> </a><hr>
 						</div>
 						<div class="col-xs-5">
-							<a href="mailto:webmaster@example.com">	<%=employees[i].email%> </a><hr>
+							<a title='Email to <%=employees[i].name%>' href="mailto:webmaster@example.com">	<%=employees[i].email%> </a><hr>
 						</div>
 						<div class="col-xs-2">
 
@@ -31,7 +31,7 @@
 				<div id='row' class="row">
 					<div class="col-xs-6">
 						<nav>
-							<a   id='a-create'class="btn btn-primary" href="/employees/new"> Add Employee </a>
+							<a   id='a-create'class="btn btn-primary" href="/employees/new"> Create Employee </a>
 						</nav>
 					</div>
 					<div class="col-xs-6">
