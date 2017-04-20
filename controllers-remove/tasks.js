@@ -7,8 +7,6 @@ var jobs = require('../data/jobs.js');
 
 // server supporting methods
 //--- remove task from each employee
-
-//--------------------------------------------
 var removeTask = function (tasks, chargeNumber){
   for (var i = 0; i < tasks.length; i++) {
     if(tasks[i].chargeNumber == chargeNumber){
@@ -59,7 +57,6 @@ router.get('/create', function(req, res){
 });
 
 router.post('/create', function(req, res){
-  console.log('add task -----------');
   console.log(req.body);
   var job_data = {
     name: req.body.taskName,
@@ -110,36 +107,21 @@ router.get('/:taskId/:empId/add', function(req, res){
 });
 
 router.post('/', function(req, res){
-  console.log('---------- add hour to employee');
-  var errMsg  = '';
   Employees.findOne({employeeId: req.body.employeeId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.body.chargeNumber} , function (err, foundTask){
-      console.log(req.body);
-      console.log("foundTask.numAvailableHours: ", foundTask.numAvailableHours);
-      console.log("freq.body.numberAssignedHour: ", req.body.numberAssignedHour);
-      if(foundTask.numAvailableHours >= req.body.numberAssignedHour){
-
-        var task = {
+      var task = {
           name: req.body.taskName,
           chargeNumber: req.body.chargeNumber,
           plannedHours: req.body.numberAssignedHour
-        }
-        if(findTask(foundEmployee.tasks, task) == false){
-          foundEmployee.tasks.push(task);
-          foundEmployee.save();
-          foundTask._employees.push(foundEmployee);
-          foundTask.numAvailableHours -= req.body.numberAssignedHour
-          foundTask.save();
-          res.redirect('/tasks');
-        }else console.log('Task is already exit');
-
       }
-      else {
-        errMsg = 'Assigned hours are invalid (hint: greater than available hours)';
-        console.log(errMsg);
-        res.send(500, errMsg);
-      }
-
+      //console.log("added Task : ", task );
+      if(findTask(foundEmployee.tasks, task) == false){
+        foundEmployee.tasks.push(task);
+        foundEmployee.save();
+        foundTask._employees.push(foundEmployee);
+        foundTask.save();
+      }else console.log('Task is already exit');
+        res.redirect('/tasks');
     });
   });
 });

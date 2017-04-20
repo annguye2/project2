@@ -114,11 +114,7 @@ router.post('/', function(req, res){
   var errMsg  = '';
   Employees.findOne({employeeId: req.body.employeeId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.body.chargeNumber} , function (err, foundTask){
-      console.log(req.body);
-      console.log("foundTask.numAvailableHours: ", foundTask.numAvailableHours);
-      console.log("freq.body.numberAssignedHour: ", req.body.numberAssignedHour);
-      if(foundTask.numAvailableHours >= req.body.numberAssignedHour){
-
+      if(foundTask.availableHour >= req.body.numberAssignedHour){
         var task = {
           name: req.body.taskName,
           chargeNumber: req.body.chargeNumber,
@@ -130,9 +126,9 @@ router.post('/', function(req, res){
           foundTask._employees.push(foundEmployee);
           foundTask.numAvailableHours -= req.body.numberAssignedHour
           foundTask.save();
-          res.redirect('/tasks');
-        }else console.log('Task is already exit');
 
+        }else console.log('Task is already exit');
+        res.redirect('/tasks');
       }
       else {
         errMsg = 'Assigned hours are invalid (hint: greater than available hours)';

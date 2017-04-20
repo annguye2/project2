@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <% include ../partials/head %>
+  <script type="text/javascript">
+  function showDescription() {
+    var name = document.getElementById("selectTask").value;
+    name = 'Need question on how to show description here:  ' + name;
+    document.getElementById("description").value=name;
+  }
+  </script>
+
+  <title>Available Tasks</title>
+</head>
+<body>
+   <% include ../partials/header %>
+
+    <div id='container-1' class="container">
+      <div class="row">
+        <h4> Available Tasks </h4>
+      </div>
+      <div class="row">
+        <ul>
+          <% for(var i = 0; i < tasks.length; i++){ %>
+            <li>
+              <a  title="Description: <%=tasks[i].description%>&#13Action: Click on this task to select employee"
+                  href="/tasks/<%=tasks[i].id %>" > <%=tasks[i].name%>
+              </a>
+            </li>
+            <% } %>
+          </ul>
+        </div>
+        <div class="row">
+          <div id ='create' class="col-xs-4">
+            <nav>
+              <a  id='a-create' class="btn btn-primary" href="/tasks/create"> Create a task</a>
+            </nav>
+          </div>
+        </div>
+
+      </div>
+
+      <div id='container-2' class="container">
+        <div class="row">
+          <h4> Selected  Tasks </h4>
+        </div>
+
+        <div id='task-info' class="row">
+          <ul>
+            <% for(var i = 0; i < assignedTasks.length; i++){ %>
+              <div class="row" id='task-name'>
+                <form action="/tasks/<%=assignedTasks[i]._id%>?_method=DELETE" method="post">
+                  <li>
+                    <div id='col-1'class="col-xs-4">
+                      <a  title="Description: <%=assignedTasks[i].description%>&#13Action: Click on this task to select more employee"
+                        href="/tasks/<%=assignedTasks[i]._id%>"><%=assignedTasks[i].name%></a>
+                    </div>
+                    <div id='col-2'class="col-xs-8">
+                      <input   id='button'  class="btn btn-primary" type="submit" name="delete" value="Remove">
+                    <a  id='button'class="btn btn-primary" id='view-link' href="/tasks/<%=assignedTasks[i]._id%>/show">View</a>
+                    </div>
+                </div>
+                    <ul>
+                      <% for(var ii = 0; ii < assignedTasks[i]._employees.length; ii++){ %>
+                        <li>
+                          <a title="View <%=assignedTasks[i]._employees[ii].name%>'s task information" href="/employees/<%=assignedTasks[i]._employees[ii]._id%>"><%=assignedTasks[i]._employees[ii].name%> </a>
+                        </li>
+                        <% } %>
+                      </ul>
+                    </li>
+                  </form>
+                  <div class="row">
+                    <hr>
+                  </div>
+                <% } %>
+              </ul>
+            </div>
+          </div>
+          <% include ../partials/footer %>
+        </body>
+        </html>

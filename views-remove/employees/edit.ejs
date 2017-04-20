@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<% include ../partials/head %>
+
+  <meta charset="utf-8">
+  <title>Assigned Task  Information</title>
+</head>
+<body>
+  <% include ../partials/header %>
+    <h4>Edit Hours</h4>
+    <div id='container-1' class="container">
+      <form action="/employees/<%=employee._id%>?_method=PUT" method="POST">
+        <h4> Task information:</h4>
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="task">Task Name:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text'readonly="true "type="text"  name="taskName" value="<%=task.name%>"> <br>
+          </div>
+        </div>
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="chargeNumber">Charge Number:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text'readonly="true "type="text"  name="chargeNumber" value="<%=task.chargeNumber%>"><br>
+          </div>
+        </div>
+
+        <div id='container-2' class="container">
+          <h4> Employee information:</h4>
+
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+              <label for="name">Employee Name: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+           <input id='text' readonly="true" type="text" name="employeeName" value="  <%= employee.name %> "><br>
+            </div>
+          </div>
+
+          <!-- <label for="name">Employee ID: </label>
+          <input readonly="true" type="text" name="employeeId" value="<%= employee.employeeId %>"><br> -->
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                <label for="name">Employee ID: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+           <input id='text' readonly="true" type="text" name="employeeId" value="<%= employee.employeeId %>"><br>
+            </div>
+          </div>
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                  <label for="name">Planned hours: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+             <input id='text' type="text" name="plannedHours" value="<%= employee.plannedHours %>"> <span id='required'>(required)</span>  <br>
+            </div>
+          </div>
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                  <input id='button'  class="btn btn-primary"type="submit" name="go-back" value="Back" onclick="back()">
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+              <input id='button'  class="btn btn-primary"type="submit" name="add-empId" value="Save Edit">
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+
+
+
+    <% include ../partials/footer %>
+</body>
+</html>

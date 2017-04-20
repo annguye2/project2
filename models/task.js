@@ -9,7 +9,7 @@ var taskSchema = mongoose.Schema({
 name: { type: String, required: true, unique: true  }, // task name
 chargeNumber: {  type: String, required: true, unique: true }, // charge number for the task
 numHours:  {  type: Number, required: true, min: [0, 'must be greater than 0'] }, // num hours given for the task
-numCompletedHours: {  type: Number, required: true }, // number hours already spent on the task
+numAvailableHours: {  type: Number, required: true , min: [0, 'must be greater than 0']}, // number hours already spent on the task
 _employees:   [Employee.schema], // set of employees who perform the task
 description: {  type: String  },
 date:  { type: Date }

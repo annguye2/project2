@@ -56,7 +56,7 @@ var loadData = function (){
         chargeNumber: jobs[i].chargeNumber,
         description: jobs[i].description,
         numHours: jobs[i].hours,
-        numCompletedHours: 0,
+        numAvailableHours: jobs[i].hours,
         employees:[],
         date: Date()
       }
