@@ -1,60 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>Team Members</title>
+	<% include ../partials/head %>
 </head>
 <body>
-	<header>
-		<h1>Tasks Tracking System</h1>
-		<nav>
-			<ul>
-				<li>
-					<a href="/">Home</a>
-				</li>
-				<li>
-					<a href="/tasks">Tasks List</a>
-				</li>
-
-			</ul>
-		</nav>
-	</header>
+	<% include ../partials/header %>
 	<main>
-		<section id='all-memebers'>
-			<h2>Team Members:</h2>
+		<div id='container-1' class="container">
+			<h4>Team Members:</h4>
 			<ul>
 				<% for(var i = 0; i < employees.length; i++){ %>
-					<li>
-						<a href="/employees/<%=employees[i].id%>"><%=employees[i].name%> </a>
-					</li>
+
+					<div id='row' class="row">
+						<div class="col-xs-5">
+							<a href="/employees/<%=employees[i].id%>"><%=employees[i].name%> </a><hr>
+						</div>
+						<div class="col-xs-5">
+							<a href="mailto:webmaster@example.com">	<%=employees[i].email%> </a><hr>
+						</div>
+						<div class="col-xs-2">
+
+								<form action="/employees/delete/<%=employees[i].id%>?_method=DELETE" method="post">
+ 									<input id='button'  class="btn btn-primary" type="submit" name="delete" value="remove">
+								</form>
+
+						</div>
+					</div>
 					<% } %>
 				</ul>
-			</section>
-			<section id='tasked-member'>
-				<h2>Tasked Members:</h2>
+				<div id='row' class="row">
+					<div class="col-xs-6">
+						<nav>
+							<a   id='a-create'class="btn btn-primary" href="/employees/new"> Add Employee </a>
+						</nav>
+					</div>
+					<div class="col-xs-6">
+					</div>
+				</div>
+			</div>
+
+
+			<div id='container-2'class="container">
+				<div class="row">
+					<h4>Tasked Members:</h4>
+				</div>
 				<ul>
 					<% for(var i = 0; i < taskedEmployees.length; i++){ %>
 						<form action="/employees/<%=taskedEmployees[i].id%>?_method=DELETE" method="post">
-						<!-- <form class="" action="index.html" method="post"> -->
 							<li>
 								<a href="/employees/<%=taskedEmployees[i].id%>"><%=taskedEmployees[i].name%> </a>
-								<input type="submit" name="delete" value="remove">
-								<div class="tasks-">
+								<input id='button'  class="btn btn-primary" type="submit" name="delete" value="remove">
+								<div class="row">
 									<ul>
 										<% for(var ii = 0; ii < taskedEmployees[i].tasks.length; ii++){ %>
-											<li>
-												 <%=taskedEmployees[i].tasks[ii].name%>
-												<span> Planned Hours:   <%=taskedEmployees[i].tasks[ii].plannedHours%> </span>
-												<a href="/employees/<%=taskedEmployees[i]._id%>/<%=taskedEmployees[i].tasks[ii].chargeNumber%>/edit"> Edit hour</a>
-											</li>
+												<div  class="row">
+													<li>
+													<div class="col-xs-6">
+															 <%=taskedEmployees[i].tasks[ii].name%>
+													</div>
+													<div class="col-xs-4">
+															Planned Hours:   <%=taskedEmployees[i].tasks[ii].plannedHours%>
+													</div>
+													<div class="col-xs-2">
+														<a id='button'  class="btn btn-primary" href="/employees/<%=taskedEmployees[i]._id%>/<%=taskedEmployees[i].tasks[ii].chargeNumber%>/edit"> Edit hour</a>
+													</div>
+													</li>
+												</div>
 											<% } %>
 										</ul>
 									</div>
 								</li>
 							</form>
+							<div class="row">
+								<hr>
+							</div>
 							<% } %>
 						</ul>
-					</section>
+			</div>
+
+
 				</main>
+				<% include ../partials/footer %>
 			</body>
 			</html>

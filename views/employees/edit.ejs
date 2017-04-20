@@ -1,31 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script>
-  function back() {
-    window.history.back();
-  }
-  </script>
+<% include ../partials/head %>
+
   <meta charset="utf-8">
   <title>Assigned Task  Information</title>
 </head>
 <body>
-  <header>
-    <h1>Tasks Tracking System</h1>
-    <nav>
-      <ul>
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/employees">Team Members</a>
-        </li>
-        <li>
-          <a href="/tasks">Task Lists</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <% include ../partials/header %>
+    <h4>Edit Hours</h4>
 
   <form action="/employees/<%=employee._id%>?_method=PUT" method="POST">
     <h4> Task information:</h4>
@@ -43,5 +26,6 @@
     <input type="submit" name="go-back" value="Go back" onclick="back()">
     <input type="submit" name="add-empId" value="Save Edit">
   </form>
+    <% include ../partials/footer %>
 </body>
 </html>

@@ -48,6 +48,36 @@ var findTask = function (tasks, task){
      }
      return false;
     }
+//--------------------------------- create new Tasks
+
+
+router.get('/create', function(req, res){
+ console.log(req.body);
+    res.render ( './tasks/create.ejs' );
+});
+
+router.post('/create', function(req, res){
+  console.log(req.body);
+  var job_data = {
+    name: req.body.taskName,
+    chargeNumber: req.body.chargeNumber,
+    description: req.body.description,
+    numHours: req.body.numberHours,
+    numCompletedHours: 0,
+    _employees:[],
+    date: Date()
+  }
+  var task = new Tasks (job_data);
+  task.save( function(err, data){
+    if(err){
+      console.log('task error', err);
+    }
+    else{
+      console.log(data);
+    }
+})
+  res.redirect('/tasks');
+});
 //----------------------------------show list of available task
 
 router.get('/', function(req,res){
@@ -77,7 +107,6 @@ router.get('/:taskId/:empId/add', function(req, res){
 });
 
 router.post('/', function(req, res){
-
   Employees.findOne({employeeId: req.body.employeeId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.body.chargeNumber} , function (err, foundTask){
       var task = {
