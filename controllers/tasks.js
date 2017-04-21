@@ -133,7 +133,7 @@ router.post('/', function(req, res){
           foundTask.numAvailableHours -= parseInt(req.body.numberAssignedHour)
           foundTask.save();
           res.redirect('/tasks');
-        }else else {
+        }else {
           console.log('Task is already exit');
           res.send(500,'Task is already assigned to this employee')
         }
