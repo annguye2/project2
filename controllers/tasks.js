@@ -16,7 +16,7 @@ var removeTask = function (tasks, chargeNumber){
       break;
     }
   }
-  console.log("task.length: " , tasks.length);
+  //console.log("task.length: " , tasks.length);
   return tasks;
 }
 //---------------------------------
@@ -66,7 +66,8 @@ router.post('/create', function(req, res){
     chargeNumber: req.body.chargeNumber,
     description: req.body.description,
     numHours: req.body.numberHours,
-    numAvailableHours: req.body.numberHours,
+    numAvailableHours:req.body.numberHours,
+    numCompletedHours: 0,
     _employees:[],
     date: Date()
   }
@@ -74,14 +75,12 @@ router.post('/create', function(req, res){
   task.save( function(err, data){
     if(err){
       console.log('task error', err);
-      res.send(500, err);
     }
     else{
       console.log(data);
-      res.redirect('/tasks');
     }
 })
-
+  res.redirect('/tasks');
 });
 //----------------------------------show list of available task
 
@@ -112,15 +111,14 @@ router.get('/:taskId/:empId/add', function(req, res){
 });
 
 router.post('/', function(req, res){
-  console.log('---------- add hour to employee');
+  //console.log('---------- add hour to employee');
   var errMsg  = '';
   Employees.findOne({employeeId: req.body.employeeId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.body.chargeNumber} , function (err, foundTask){
-      console.log(req.body);
-      console.log("foundTask.numAvailableHours: ", foundTask.numAvailableHours);
-      console.log("freq.body.numberAssignedHour: ", req.body.numberAssignedHour);
-      if(foundTask.numAvailableHours >= req.body.numberAssignedHour){
-
+      // console.log(req.body);
+      // console.log("foundTask.numAvailableHours: ", foundTask.numAvailableHours);
+      // console.log("req.body.numberAssignedHour: ", req.body.numberAssignedHour);
+      if(foundTask.numAvailableHours >= parseInt(req.body.numberAssignedHour)){
         var task = {
           name: req.body.taskName,
           chargeNumber: req.body.chargeNumber,
@@ -189,7 +187,7 @@ router.get('/:id', function(req,res){
 //---------- delete task
 router.delete('/:id', function(req, res){
   //  (hint: remove all task from selected employee)
-  //console.log('remove task: ');
+  console.log('______remove task and employees assigned in the task: ');
   Tasks.findById(req.params.id, function(err, foundTask){
     var saveEmployees = foundTask._employees
     var saveTaskChargeNumber = foundTask.chargeNumber;
@@ -197,6 +195,18 @@ router.delete('/:id', function(req, res){
       //remove task in each employee's task list
       Employees.findOne({employeeId: saveEmployees[i].employeeId }, function (err, foundEmployee){
         var tasks = foundEmployee.tasks;
+          for (var i = 0; i < tasks.length; i ++){
+            if (tasks[i].chargeNumber == foundTask.chargeNumber)
+            {
+              console.log('Befor: found task num available hour:', foundTask.numAvailableHours);
+              // foundTask.numAvailableHours += tasks[i].plannedHours;
+              foundTask.numAvailableHours = foundTask.numHours;
+              foundTask.save();
+              console.log('After: found task num available hour:', foundTask.numAvailableHours);
+              console.log('foundTask', foundTask);
+              break;
+            }
+          }
         var saveTasks = removeTask(tasks, saveTaskChargeNumber);
         foundEmployee.tasks = saveTasks;
         foundEmployee.save();

@@ -28,7 +28,22 @@
             <input id='text'readonly="true "type="text"  name="chargeNumber" value="<%=task.chargeNumber%>"><br>
           </div>
         </div>
-
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="total hours">Total Hours:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text'readonly="true "type="text"  name="numHours" value="<%=task.numHours%>"><br>
+          </div>
+        </div>
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="available hours">Available Hours:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text'readonly="true "type="text"  name="numAvailableHours" value="<%=task.numAvailableHours%>"><br>
+          </div>
+        </div>
         <div id='container-2' class="container">
           <h4> Employee information:</h4>
 
@@ -53,12 +68,21 @@
           </div>
           <div class="row">
             <div id='col-1-show'class="col-xs-6">
-                  <label for="name">Planned hours: </label>
+                  <label for="name">Planned Hours: </label>
             </div>
             <div id='col-2-show'class="col-xs-6">
-             <input id='text' type="text" name="plannedHours" value="<%= employee.plannedHours %>"> <span id='required'>(required)</span>  <br>
+             <input id='text' readonly='true' type="text" name="plannedHours" value="<%=currentPlannedHours%>"> <br>
             </div>
           </div>
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                  <label for="name">New Plan Hours: </label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+             <input id='text' type="text" name="newPlannedHours" value=""> <span id='required'>(required)</span>  <br>
+            </div>
+          </div>
+
           <div class="row">
             <div id='col-1-show'class="col-xs-6">
                   <input id='button'  class="btn btn-primary"type="submit" name="go-back" value="Back" onclick="back()">

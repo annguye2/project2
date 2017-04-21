@@ -7,14 +7,16 @@ var employees = require('../data/employees.js'); // employees data
 // server supporting methods
 //------------------------------edit task
 var editTasks = function (tasks, chargeNumber, plannedHours){
-
- for (var i = 0; i < tasks.length; i++) {
-         if (tasks[i].chargeNumber == chargeNumber){
-            tasks[i].plannedHours = plannedHours;
-            break;
-         }
- }
- return tasks
+  console.log('new planned hours ', plannedHours);
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].chargeNumber == chargeNumber){
+      console.log('hello');
+      tasks[i].plannedHours = parseInt(plannedHours);
+      console.log(tasks[i].plannedHours);
+      break;
+    }
+  }
+  return tasks
 }
 //------------------------------ get selected task
 var removeEmployee = function (employees, employeeId){
@@ -33,15 +35,15 @@ var removeEmployee = function (employees, employeeId){
 var getTaskedEmployees = function(allEmployees){
   var taskedEmployees = [];
   for (var i = 0; i < allEmployees.length; i++) {
-         if( allEmployees[i].tasks.length != 0){
-           taskedEmployees.push(allEmployees[i]);
-         }
+    if( allEmployees[i].tasks.length != 0){
+      taskedEmployees.push(allEmployees[i]);
+    }
   }
   return taskedEmployees
 }
 //----------------------------------------------create new Employee
 router.get('/new', function(req, res){
-   res.render('./employees/new.ejs');
+  res.render('./employees/new.ejs');
 });
 
 router.post('/', function(req, res){
@@ -65,7 +67,7 @@ router.post('/', function(req, res){
       console.log(data);
     }
   });
- res.redirect('/employees')
+  res.redirect('/employees')
 })
 //-----------------------------------------------Employee index page
 router.get('/', function(req, res){
@@ -81,10 +83,19 @@ router.get('/', function(req, res){
 router.get('/:imployeeObjId/:taskChargeNumber/edit', function (req, res){
   Employees.findById({_id: req.params.imployeeObjId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.params.taskChargeNumber}, function (err, foundTask){
-      console.log('in edit ', foundEmployee);
+      // console.log('in edit  found employee ', foundEmployee);
+      var plannedHours = 0;
+      for (var i = 0; i <  foundEmployee.tasks.length; i ++ ){
+        if (foundEmployee.tasks[i].chargeNumber == req.params.taskChargeNumber){
+          plannedHours = foundEmployee.tasks[i].plannedHours;
+          //  console.log("currentPlannedHours: ", plannedHours);
+          break;
+        }
+      }
       res.render('./employees/edit.ejs', {
         employee :foundEmployee,
-        task: foundTask
+        task: foundTask,
+        currentPlannedHours:plannedHours
       });
     });
   });
@@ -92,95 +103,103 @@ router.get('/:imployeeObjId/:taskChargeNumber/edit', function (req, res){
 
 //------------------------------------------Edit task
 router.put('/:id', function(req, res){
-  console.log('------------ put--------');
+  //console.log('------------ Edit Hours --put--------');
+  //console.log(req.body);
   Employees.findOne({employeeId: req.body.employeeId}, function(err, foundEmployee){
     Tasks.findOne({chargeNumber: req.body.chargeNumber}, function (err, foundTask){
-          var tasks = foundEmployee.tasks; //save the tasks
-          foundEmployee.tasks =[];
-          foundEmployee.tasks = editTasks(tasks, req.body.chargeNumber, req.body.plannedHours);
-          foundEmployee.save();
-      for (var i = 0 ; i < foundTask._employees.length ; i ++){
-            //find employee
-              if (foundTask._employees[i].employeeId == req.body.employeeId){
-                 console.log(foundTask._employees[i]);
-                 foundTask._employees[i].tasks = [];
-                 foundTask._employees[i].tasks =foundEmployee.tasks
-                break;
-              }
+      var  remainHours = parseInt(req.body.numAvailableHours) + parseInt(req.body.plannedHours)-
+      parseInt(req.body.newPlannedHours);
+      if(remainHours >= 0){
+      //  console.log("remainHours  :",   remainHours);
+        var tasks = foundEmployee.tasks; //save the tasks
+        foundEmployee.tasks =[];
+        foundEmployee.tasks = editTasks(tasks, req.body.chargeNumber, req.body.newPlannedHours);
+        foundEmployee.save();
+        for (var i = 0 ; i < foundTask._employees.length ; i ++){
+          //find employee
+          if (foundTask._employees[i].employeeId == req.body.employeeId){
+            console.log(foundTask._employees[i]);
+            foundTask._employees[i].tasks = [];
+            foundTask._employees[i].tasks =foundEmployee.tasks
+            break;
+          }
         }
+        foundTask.numAvailableHours = remainHours
         foundTask.save();
+        res.redirect('/employees')
+      }else{
+        res.send('Error! Invalid number hours enter!');
+      }
     });
-    res.redirect('/employees')
   });
 });
-
-
 //--------------------remove item from the tasked employees
 //
 router.delete('/:id', function(req, res){
   //  (hint: remove all task from selected employee)
-  console.log('remove assigned employees');
-  Employees.findById(req.params.id, function(err, foundEmployee){
-    var tasks = foundEmployee.tasks;
-    var employeeId = foundEmployee.employeeId;
+  //  (hint: remove all task from selected employee)
+console.log('remove assigned employees');
+Employees.findById(req.params.id, function(err, foundEmployee){
+  var tasks = foundEmployee.tasks;
+  var employeeId = foundEmployee.employeeId;
 
-    for (var i = 0; i < tasks.length; i++) {
-      Tasks.findOne({name: tasks[i].name }, function (err, foundTasks){
-        // console.log('Found?? ');
-        var employees = foundTasks._employees;
-        // console.log("emloyees: ", employees);
-        var saveEmployees = removeEmployee(employees, employeeId)
-        foundTasks._employees = saveEmployees;
-        //foundTasks._employees = saveEmployees;
-        foundTasks.save();
-        //console.log("foundTasks:  ", foundTasks);
-      })
-    }
-    foundEmployee.tasks =[];
-    foundEmployee.save();
-    res.redirect('/employees');
+  for (var i = 0; i < tasks.length; i++) {
+    Tasks.findOne({name: tasks[i].name }, function (err, foundTasks){
+      // console.log('Found?? ');
+      var employees = foundTasks._employees;
+      // console.log("emloyees: ", employees);
+      var saveEmployees = removeEmployee(employees, employeeId)
+      foundTasks._employees = saveEmployees;
+      //foundTasks._employees = saveEmployees;
+      foundTasks.save();
+      //console.log("foundTasks:  ", foundTasks);
+    })
+  }
+  foundEmployee.tasks =[];
+  foundEmployee.save();
+  res.redirect('/employees');
 
-  });
+});
 });
 
 //--------------------remove item from the tasked employees
 //
 router.delete('/delete/:id', function(req, res){
 
-  //  (hint: remove all task from selected employee)
-  console.log('remove employees in mongoose');
+    //  (hint: remove all task from selected employee)
+    console.log('remove employees in mongoose');
 
-  Employees.findByIdAndRemove(req.params.id, function(err, foundEmployee){
-    console.log('found employee', foundEmployee);
-    var tasks = foundEmployee.tasks;
-    var employeeId = foundEmployee.employeeId;
+    Employees.findByIdAndRemove(req.params.id, function(err, foundEmployee){
+      console.log('found employee', foundEmployee);
+      var tasks = foundEmployee.tasks;
+      var employeeId = foundEmployee.employeeId;
 
-    for (var i = 0; i < tasks.length; i++) {
-      Tasks.findOne({name: tasks[i].name }, function (err, foundTasks){
-        // console.log('Found?? ');
-        var employees = foundTasks._employees;
-        // console.log("emloyees: ", employees);
-        var saveEmployees = removeEmployee(employees, employeeId)
-        foundTasks._employees = saveEmployees;
-        //foundTasks._employees = saveEmployees;
-        foundTasks.save();
-        //console.log("foundTasks:  ", foundTasks);
-      })
-    }
-    foundEmployee.tasks =[];
-    foundEmployee.save();
-    res.redirect('/employees');
+      for (var i = 0; i < tasks.length; i++) {
+        Tasks.findOne({name: tasks[i].name }, function (err, foundTasks){
+          // console.log('Found?? ');
+          var employees = foundTasks._employees;
+          // console.log("emloyees: ", employees);
+          var saveEmployees = removeEmployee(employees, employeeId)
+          foundTasks._employees = saveEmployees;
+          //foundTasks._employees = saveEmployees;
+          foundTasks.save();
+          //console.log("foundTasks:  ", foundTasks);
+        })
+      }
+      foundEmployee.tasks =[];
+      foundEmployee.save();
+      res.redirect('/employees');
 
-  });
+    });
 });
 //------------- show selected employee's information
 router.get('/:id', function (req, res){
   Employees.findById({_id: req.params.id}, function(err, foundEmployee){
     //console.log('employee tasks: ' , foundEmployee._tasks);
-       res.render('./employees/show.ejs', {
-           employee :foundEmployee
-       });
-   });
+    res.render('./employees/show.ejs', {
+      employee :foundEmployee
+    });
+  });
 });
 
 

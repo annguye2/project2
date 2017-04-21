@@ -17,22 +17,22 @@ module.exports  = [
     description: "This is task number 3",
     hours:  580
   },
-  {
-    name: "Task 4 - VRTD Assessment and Mitigation Recommendations",
-    chargeNumber:"CHARGE-0004-0004-0004",
-    description: "This is task number 4",
-    hours:  300
-  },
-  {
-    name: "Task 5 - Infrastructure/Internet Analysis Assessment Tool",
-    chargeNumber:"CHARGE-0005-0005-0005",
-    description: "This is task number 5",
-    hours:  600
-  },
-  {
-    name: "Task 6 - ESRI Database Support",
-    chargeNumber:"CHARGE-0006-0006-0006",
-    description: "This is task number 6",
-    hours:  160
-  }
+  // {
+  //   name: "Task 4 - VRTD Assessment and Mitigation Recommendations",
+  //   chargeNumber:"CHARGE-0004-0004-0004",
+  //   description: "This is task number 4",
+  //   hours:  300
+  // },
+  // {
+  //   name: "Task 5 - Infrastructure/Internet Analysis Assessment Tool",
+  //   chargeNumber:"CHARGE-0005-0005-0005",
+  //   description: "This is task number 5",
+  //   hours:  600
+  // },
+  // {
+  //   name: "Task 6 - ESRI Database Support",
+  //   chargeNumber:"CHARGE-0006-0006-0006",
+  //   description: "This is task number 6",
+  //   hours:  160
+  // }
 ]
