@@ -1,0 +1,75 @@
+<!-- This file used to add new task
+which do the following:
+- add task package to mongoose
+- add assigned employee package to mongoose -->
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <% include ../partials/head %>
+  <title>Add employees to new Task</title>
+
+
+</head>
+<body>
+     <% include ../partials/header %>
+  <h1> Create New Employee</h1>
+  <div id='container-1' class="container">
+    <form class="" action="/employees" method="post">
+      <h4> Employee Information:</h4>
+
+
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="employee-name">Name:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+             <input  id='text' type="text" class="form-control"  name="name" value=""> <span id='required'>(require)</span><br>
+          </div>
+        </div>
+        <div class="row">
+          <div id='col-1-show'class="col-xs-6">
+            <label for="employeeId">Employee ID:</label>
+          </div>
+          <div id='col-2-show'class="col-xs-6">
+            <input id='text' type="text" class="form-control" type="text"  name="employeeId" value=""><span id='required'>(require)</span><br>
+
+          </div>
+        </div>
+
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                <label for="phone">Phone:</label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+                <input id='text' type="text" class="form-control" type='text' name="phone"><br>
+            </div>
+          </div>
+
+          <div class="row">
+            <div id='col-1-show'class="col-xs-6">
+                <label for="email">Email:</label>
+            </div>
+            <div id='col-2-show'class="col-xs-6">
+              <input id='text' type="text" class="form-control"type='text' name="email"><br>
+            </div>
+          </div>
+
+            <div class="row">
+              <div id='col-1-show'class="col-xs-6">
+                    <input id='button'class="btn btn-primary" type="submit" value="Back"/>
+              </div>
+              <div id='col-2-show'class="col-xs-6">
+                <input id='button'class="btn btn-primary" type="submit" value="Add Employee"/>
+              </div>
+            </div>
+    </form>
+  </div>
+
+
+
+
+    <% include ../partials/footer %>
+</body>
+</html>
